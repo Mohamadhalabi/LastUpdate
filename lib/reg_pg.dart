@@ -1,23 +1,18 @@
 import 'package:flutter/cupertino.dart';
-import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'Utility.dart';
 import 'loading.dart';
-import 'main.dart';
 
-class reg_pg extends StatefulWidget {
+class Reg_pg extends StatefulWidget {
   @override
   _UserPageState createState() => _UserPageState();
 }
 
-class _UserPageState extends State<reg_pg> {
+class _UserPageState extends State<Reg_pg> {
   Future<File> imageFile;
   Image imageFromPreferences;
   Timer timer1;
@@ -26,8 +21,6 @@ class _UserPageState extends State<reg_pg> {
   TextEditingController surenamecontroler = new TextEditingController();
 
   Future<File> imageFile1;
-
-  // Image imageFromPreferences;
 
   pickImageFromGallery(ImageSource source) {
     setState(() {
@@ -62,7 +55,6 @@ class _UserPageState extends State<reg_pg> {
       builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
         if (snapshot.connectionState == ConnectionState.done &&
             null != snapshot.data) {
-          //print(snapshot.data.path);
           Utility.saveImageToPreferences(
               Utility.base64String(snapshot.data.readAsBytesSync()));
           return const Text(
@@ -126,32 +118,6 @@ class _UserPageState extends State<reg_pg> {
     print("data stored");
   }
 
-  // _openCamera(BuildContext context) async {
-  //   var picture = await ImagePicker.pickImage(source: ImageSource.camera);
-  //   this.setState(() {
-  //     imageFile = picture;}
-  //     );
-  //   Navigator.of(context).pop();
-  // }
-  // loadImageFromPreferences() {
-  //   Utility.getImageFromPreferences().then((img) {
-  //     if (null == img) {
-  //       return;
-  //     }
-  //     setState(() {
-  //       imageFromPreferences = Utility.imageFromBase64String(img);
-  //     });
-  //   });
-  // }
-
-  _openGallary(ImageSource source) {
-    setState(() {
-      imageFile = ImagePicker.pickImage(source: source);
-    });
-
-    Navigator.of(context).pop();
-  }
-
   Future<void> _ShowChoiseDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -163,20 +129,13 @@ class _UserPageState extends State<reg_pg> {
                 children: <Widget>[
                   FlatButton.icon(
                     icon: Icon(Icons.image),
-                    onPressed: () {
-                      // pickImageFromGallery(ImageSource.gallery);
-                      // setState(() {
-                      //   imageFromPreferences = null;
-                      // });
-                    },
+                    onPressed: () {},
                     label: Text('Image'),
                   ),
                   Padding(padding: EdgeInsets.all(8.0)),
                   FlatButton.icon(
                     icon: Icon(Icons.camera),
-                    onPressed: () {
-                      // _openCamera(context);
-                    },
+                    onPressed: () {},
                     label: Text('Camera'),
                   )
                 ],
@@ -230,36 +189,6 @@ class _UserPageState extends State<reg_pg> {
     );
   }
 
-  // Widget emptyPic() {
-  //   return Center(
-  //     child: Stack(
-  //       children: <Widget>[
-  //         CircleAvatar(
-  //           radius: 80.0,
-  //           backgroundColor: Colors.grey,
-  //         ),
-  //         Positioned(
-  //           bottom: 20.0,
-  //           right: 20.0,
-  //           child: InkWell(
-  //             onTap: () async {
-  //
-  //               await _ShowChoiseDialog(context);
-  //
-  //
-  //             },
-  //             child: Icon(
-  //               Icons.camera_alt,
-  //               color: Colors.teal,
-  //               size: 28.0,
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget _decideImageView() {
     if (imageFile == null) {
       return Center(
@@ -293,7 +222,6 @@ class _UserPageState extends State<reg_pg> {
             CircleAvatar(
               radius: 80.0,
               child: imageFromGallery(),
-              // backgroundImage:   imageFromGallery(),
             ),
             Positioned(
               bottom: 20.0,
@@ -329,7 +257,6 @@ class _UserPageState extends State<reg_pg> {
                     onPressed: () {
                       pickImageFromGallery(ImageSource.gallery);
                       setState() {
-                        // imageFromPreferences = null;
                         imageFromGallery();
                         loadImageFromPreferences();
                         Timer(Duration(seconds: 1),
@@ -360,11 +287,10 @@ class _UserPageState extends State<reg_pg> {
         });
   }
 
-  // }
   void logout() async {
     final pref = await SharedPreferences.getInstance();
     await pref.clear();
-    print(" this is the logout function!!!!!!!!!!!!!!!!!!!!!!!");
+
     setState(() {
       imageFromPreferences = null;
     });
@@ -461,12 +387,6 @@ class _UserPageState extends State<reg_pg> {
                           ),
                           onPressed: () {
                             _ShowChoise(context);
-                            // pickImageFromGallery(ImageSource.gallery);
-                            // setState(() {
-                            //   // imageFromPreferences = null;
-                            //   imageFromGallery();
-                            //   loadImageFromPreferences();
-                            // });
                           },
                         ),
                       ],
@@ -502,11 +422,7 @@ class _UserPageState extends State<reg_pg> {
                   storeData(namecontroler.text, surenamecontroler.text);
 
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => loadingpg()));
-                  // Navigator.pop(context);
-
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (context) => myNavigationBar()));
+                      MaterialPageRoute(builder: (context) => Loadingpg()));
                 },
                 child: Text('save'),
               ),

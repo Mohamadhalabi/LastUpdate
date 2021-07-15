@@ -5,7 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 
 class Utility {
-  //
+
   static const String KEY = "IMAGE_KEY";
 
   static Future<String> getImageFromPreferences() async {

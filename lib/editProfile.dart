@@ -1,23 +1,18 @@
 import 'package:flutter/cupertino.dart';
-import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'Utility.dart';
 import 'loading.dart';
-import 'main.dart';
 
-class editPro extends StatefulWidget {
+class EditPro extends StatefulWidget {
   @override
   _UserPageState createState() => _UserPageState();
 }
 
-class _UserPageState extends State<editPro> {
+class _UserPageState extends State<EditPro> {
   Future<File> imageFile;
   Image imageFromPreferences;
 
@@ -124,24 +119,6 @@ class _UserPageState extends State<editPro> {
     print("data stored");
   }
 
-  // _openCamera(BuildContext context) async {
-  //   var picture = await ImagePicker.pickImage(source: ImageSource.camera);
-  //   this.setState(() {
-  //     imageFile = picture;}
-  //     );
-  //   Navigator.of(context).pop();
-  // }
-  // loadImageFromPreferences() {
-  //   Utility.getImageFromPreferences().then((img) {
-  //     if (null == img) {
-  //       return;
-  //     }
-  //     setState(() {
-  //       imageFromPreferences = Utility.imageFromBase64String(img);
-  //     });
-  //   });
-  // }
-
   _openGallary(ImageSource source) {
     setState(() {
       imageFile = ImagePicker.pickImage(source: source);
@@ -162,10 +139,7 @@ class _UserPageState extends State<editPro> {
                   FlatButton.icon(
                     icon: Icon(Icons.image),
                     onPressed: () {
-                      // pickImageFromGallery(ImageSource.gallery);
-                      // setState(() {
-                      //   imageFromPreferences = null;
-                      // });
+
                     },
                     label: Text('Image'),
                   ),
@@ -173,7 +147,7 @@ class _UserPageState extends State<editPro> {
                   FlatButton.icon(
                     icon: Icon(Icons.camera),
                     onPressed: () {
-                      // _openCamera(context);
+
                     },
                     label: Text('Camera'),
                   )
@@ -194,11 +168,11 @@ class _UserPageState extends State<editPro> {
       decoration: InputDecoration(
           border: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.teal,
+                color: Colors.blueAccent,
               )),
           prefixIcon: Icon(
             Icons.person,
-            color: Colors.teal,
+            color: Colors.blueAccent,
           ),
           labelText: "Name",
           helperText: "Name Cant Be Empty",
@@ -228,35 +202,6 @@ class _UserPageState extends State<editPro> {
     );
   }
 
-  // Widget emptyPic() {
-  //   return Center(
-  //     child: Stack(
-  //       children: <Widget>[
-  //         CircleAvatar(
-  //           radius: 80.0,
-  //           backgroundColor: Colors.grey,
-  //         ),
-  //         Positioned(
-  //           bottom: 20.0,
-  //           right: 20.0,
-  //           child: InkWell(
-  //             onTap: () async {
-  //
-  //               await _ShowChoiseDialog(context);
-  //
-  //
-  //             },
-  //             child: Icon(
-  //               Icons.camera_alt,
-  //               color: Colors.teal,
-  //               size: 28.0,
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget _decideImageView() {
     if (imageFile == null) {
@@ -276,7 +221,7 @@ class _UserPageState extends State<editPro> {
                 },
                 child: Icon(
                   Icons.camera_alt,
-                  color: Colors.teal,
+                  color: Colors.blueAccent,
                   size: 28.0,
                 ),
               ),
@@ -327,7 +272,6 @@ class _UserPageState extends State<editPro> {
                     onPressed: () {
                       pickImageFromGallery(ImageSource.gallery);
                       setState() {
-                        // imageFromPreferences = null;
                         imageFromGallery();
                         loadImageFromPreferences();
                         Timer(Duration(seconds: 1),
@@ -358,11 +302,11 @@ class _UserPageState extends State<editPro> {
         });
   }
 
-  // }
+
   void logout() async {
     final pref = await SharedPreferences.getInstance();
     await pref.clear();
-    print(" this is the logout function!!!!!!!!!!!!!!!!!!!!!!!");
+
     setState(() {
       imageFromPreferences = null;
     });
@@ -452,12 +396,7 @@ class _UserPageState extends State<editPro> {
                     ),
                     onPressed: () {
                       _ShowChoise(context);
-                      // pickImageFromGallery(ImageSource.gallery);
-                      // setState(() {
-                      //   // imageFromPreferences = null;
-                      //   imageFromGallery();
-                      //   loadImageFromPreferences();
-                      // });
+
                     },
                   ),
                 ],
@@ -477,7 +416,7 @@ class _UserPageState extends State<editPro> {
                   IconButton(
                     icon: Icon(
                       Icons.camera_alt,
-                      color: Colors.teal,
+                      color: Colors.blueAccent,
                       size: 28.0,
                     ),
                     onPressed: () {},
@@ -492,11 +431,8 @@ class _UserPageState extends State<editPro> {
                   storeData(namecontroler.text, surenamecontroler.text);
 
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => loadingpg()));
-                  // Navigator.pop(context);
+                      MaterialPageRoute(builder: (context) => Loadingpg()));
 
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (context) => myNavigationBar()));
                 },
                 child: Text('save'),
               ),

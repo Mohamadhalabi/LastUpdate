@@ -4,12 +4,17 @@ import 'package:flutter_app/Home.dart';
 import 'package:flutter_app/reg_pg.dart';
 import 'package:flutter_app/userPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/services.dart';
 
+
+
+
+//El-Main
 void main() {
   runApp(MyApp());
 }
 
+
+//Main Class
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+//Splash Screen Class
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
 
@@ -30,16 +35,16 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> choosPage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String name = prefs.getString("surename");
+
     print(prefs.getString("surename"));
     if (prefs.getString("surename") == null) {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => reg_pg()));
+          MaterialPageRoute(builder: (BuildContext context) => Reg_pg()));
     } else {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) => myNavigationBar()));
+              builder: (BuildContext context) => MyNavigationBar()));
     }
   }
 
@@ -118,15 +123,15 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-class myNavigationBar extends StatefulWidget {
+class MyNavigationBar extends StatefulWidget {
   @override
 
-  _myNavigationBarState createState() => _myNavigationBarState();
+  _MyNavigationBarState createState() => _MyNavigationBarState();
 
 }
 
 
-class _myNavigationBarState extends State<myNavigationBar> {
+class _MyNavigationBarState extends State<MyNavigationBar> {
   int currentIndex = 0;
 
   final List<Widget> _children = [userPage(), BluetoothApp()];
@@ -155,11 +160,6 @@ class _myNavigationBarState extends State<myNavigationBar> {
               // ignore: deprecated_member_use
               title: new Text('Home'),
             ),
-            // BottomNavigationBarItem(
-            //   icon: new Icon(Icons.directions_car),
-            //   // ignore: deprecated_member_use
-            //   title: new Text('Drive'),
-            // ),
           ]),
     );
   }

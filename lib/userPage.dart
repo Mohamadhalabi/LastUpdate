@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Utility.dart';
+import 'editProfile.dart';
 
 class userPage extends StatefulWidget {
   @override
@@ -170,8 +171,10 @@ class _UserPageState extends State<userPage> {
               icon: Icon(Icons.mode_edit),
               onPressed: () async {
                 //logout();
+                final pref = await SharedPreferences.getInstance();
+                await pref.clear();
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (BuildContext context) => reg_pg()));
+                    MaterialPageRoute(builder: (BuildContext context) => EditPro()));
               }),
           IconButton(
               icon: Icon(Icons.logout),
